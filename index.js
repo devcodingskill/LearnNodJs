@@ -60,7 +60,19 @@ app.put('/api/book/:id',(req,resp)=>
 
 })
 /**Delete method */
-
+app.delete('/api/book/:id',(req,resp)=>
+{
+    const book = books.find(i=>i.id === parseInt(req.params.id))
+    if(!book)
+    resp.status(404).send('books not found')
+    else
+    {
+       const index = books.indexOf(book)
+       books.splice(index,1)
+       
+       resp.send(book)
+    }
+})
 
 
 //set up port 
