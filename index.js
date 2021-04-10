@@ -7,9 +7,9 @@ app.use(express.json());
 //temp data for testing
 const books = 
 [
-    {title:'Java program',id: 1 },
-    {title:'C# program',id: 2 },
-    {title:'NodeJs program',id: 3 },
+    {title:'Java program',id:1 },
+    {title:'C# program',id:2 },
+    {title:'NodeJs program',id:3 },
 ];
 
 
@@ -21,10 +21,18 @@ app.get('/',(req,resp)=>
     resp.send('Welcome to my API')
 });
 
-app.get('/api/book',(req,resp)=>
+app.get('/api/books',(req,resp)=>
 {
     resp.send(books)
+})
 
+app.get('/api/book/:id',(req,resp)=>
+{
+    const book = books.find(i=>i.id === parseInt(req.params.id))
+    if(!book)
+    resp.status(404).send('books not found')
+    else
+    resp.send(book)
 })
 /**Post Method */
 
