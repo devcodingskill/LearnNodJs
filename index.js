@@ -35,6 +35,31 @@ app.get('/api/book/:id',(req,resp)=>
     resp.send(book)
 })
 /**Post Method */
+app.post('/api/book/addBook',(req,resp)=>
+{
+    const book = 
+    {
+        id: books.length+1,
+        title: req.body.title
+    }
+    books.push(book)
+    resp.send(book)
+
+})
+/**Put method (update) */
+app.put('/api/book/:id',(req,resp)=>
+{
+    const book = books.find(i=>i.id === parseInt(req.params.id))
+    if(!book)
+    resp.status(404).send('books not found')
+    else
+    {
+       book.title =req.body.title
+       resp.send(book)
+    }
+
+})
+/**Delete method */
 
 
 
